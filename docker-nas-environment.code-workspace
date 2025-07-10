@@ -1,0 +1,173 @@
+{
+    "folders": [
+        {
+            "name": "🐳 Docker NAS Environment",
+            "path": "/home/avctrust/docker"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.cwd": "/home/avctrust/docker",
+        "files.watcherExclude": {
+            "**/node_modules/**": true,
+            "**/.git/objects/**": true,
+            "**/.git/subtree-cache/**": true,
+            "**/logs/**": true,
+            "**/@eaDir/**": true,
+            "**/#recycle/**": true,
+            "**/venv/**": true,
+            "**/.venv/**": true,
+            "**/env/**": true,
+            "**/.env/**": true,
+            "**/dist/**": true,
+            "**/build/**": true,
+            "**/__pycache__/**": true,
+            "**/.pytest_cache/**": true,
+            "**/.coverage/**": true,
+            "**/coverage/**": true,
+            "**/tmp/**": true,
+            "**/temp/**": true
+        },
+        "files.exclude": {
+            "**/.git": false,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true,
+            "**/desktop.ini": true,
+            "**/@eaDir": true,
+            "**/#recycle": true,
+            "**/logs": true,
+            "**/.aliasrc": true,
+            "**/New folder": true,
+            "**/Nueva carpeta": true,
+            "**/_respaldo_*": true,
+            "**/node_modules": true,
+            "**/.venv": true,
+            "**/venv": true,
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/*.log": true
+        },
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/*.code-search": true,
+            "**/logs": true,
+            "**/@eaDir": true,
+            "**/#recycle": true,
+            "**/venv": true,
+            "**/.venv": true,
+            "**/__pycache__": true,
+            "**/dist": true,
+            "**/build": true,
+            "**/.git": true,
+            "**/tmp": true,
+            "**/temp": true
+        },
+        "git.ignoreLimitWarning": true,
+        "git.detectSubmodules": false,
+        "files.associations": {
+            "*.yml": "yaml",
+            "*.yaml": "yaml",
+            "docker-compose*": "yaml",
+            "Dockerfile*": "dockerfile",
+            ".env*": "properties",
+            "*.conf": "ini",
+            "*.config": "ini"
+        },
+        "docker.defaultRegistry": "",
+        "docker.showStartPage": false,
+        "workbench.colorCustomizations": {
+            "titleBar.activeBackground": "#1e3a8a",
+            "titleBar.activeForeground": "#ffffff",
+            "titleBar.inactiveBackground": "#1e3a8a80",
+            "titleBar.inactiveForeground": "#ffffff80",
+            "statusBar.background": "#1e3a8a",
+            "statusBar.foreground": "#ffffff"
+        },
+        "workbench.tree.indent": 12,
+        "explorer.compactFolders": false,
+        "python.defaultInterpreterPath": "/usr/bin/python3",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode-remote.remote-ssh",
+            "ms-vscode-remote.remote-containers",
+            "ms-azuretools.vscode-docker",
+            "redhat.vscode-yaml",
+            "ms-python.python",
+            "bradlc.vscode-tailwindcss",
+            "esbenp.prettier-vscode",
+            "ms-vscode.vscode-json",
+            "streetsidesoftware.code-spell-checker",
+            "shd101wyy.markdown-preview-enhanced",
+            "github.vscode-github-actions",
+            "github.copilot",
+            "github.copilot-chat"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "🔍 Complete Environment Analysis",
+                "type": "shell",
+                "command": "./avc_ssh_host/scripts/docker-master-analysis.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "🌐 Port Analysis",
+                "type": "shell",
+                "command": "./avc_ssh_host/scripts/docker-ports-analysis.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "🏗️ Environment Analysis",
+                "type": "shell",
+                "command": "./avc_ssh_host/scripts/docker-environment-analysis.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "📊 List Docker Projects",
+                "type": "shell",
+                "command": "./avc_ssh_host/scripts/list-docker-projects.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "🚀 Connect to NAS Host",
+                "type": "shell",
+                "command": "ssh -p 2222 avctrust@10.0.0.10",
+                "group": "build"
+            },
+            {
+                "label": "🔐 Run Security Check",
+                "type": "shell",
+                "command": "bash github-init.sh",
+                "group": "test",
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            }
+        ]
+    }
+}
