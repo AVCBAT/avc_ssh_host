@@ -1,23 +1,11 @@
-# ====# ==========================================
-# 🚨 CRITICAL SECURITY FILES====================================
+# ===============================================
 # 🔒 MASTER GITIGNORE - DOCKER NAS ENVIRONMENT
 # ===============================================
 # Security file for 41 Docker projects
-# Generat# ==========================================
-# 🚫 IGNORE ALL DOCKER PROJECTS BY DEFAULT
+# Generated: 2025-07-10
+
 # ==========================================
-# Strategy: Add projects incrementally as we prepare them
-# This ensures maximum security and control
-
-# Ignore ALL project directories by default5-07-10
-
-# ==========================================# ==========================================
-# � IGNORE ALL DOCKER PROJECTS BY DEFAULT
-# ==========================================
-# Strategy: Add projects incrementally as we prepare them
-# This ensures maximum security and control
-
-# Ignore ALL project directories by defaultRITICAL SECURITY FILES
+# 🚨 CRITICAL SECURITY FILES
 # ==========================================
 # NEVER commit these files
 .env
@@ -50,6 +38,79 @@ auth/
 config/secrets.yml
 config/database.yml
 config/production.yml
+
+# ==========================================
+# 🚫 IGNORE ALL DOCKER PROJECTS BY DEFAULT
+# ==========================================
+# Strategy: Add projects incrementally as we prepare them
+# This ensures maximum security and control
+
+# Ignore ALL project directories by default
+abc_python_runner/
+arduino/
+avc_ai_terminal/
+avc_api/
+avc_autodeploy_manager/
+avc_code_server/
+avc_converter/
+avc_dalle_worker/
+avc_database/
+avc_db_mirror/
+avc_dev_container/
+avc_fft_streamer/
+avc_gemini_bot/
+avc_ha_editor/
+avc_php_dev/
+avc_remote_hub/
+avc_repo/
+avc_smtp/
+avc_sonarqube/
+avc_test123/
+avc_text_worker/
+avc_wireguard/
+behavioural_dragon_pro/
+bind9/
+copilot_demo/
+deepseek/
+esphome/
+nginx-rtmp/
+telegram_chatbot/
+telegram_download/
+trustvault/
+ubuntu/
+unifi/
+youtube_mp3_downloader/
+
+# Backup and old directories
+_respaldo_*/
+*_old/
+*_backup/
+
+# System directories and Spanish named folders
+@eaDir/
+#recycle/
+"New folder"/
+"Nueva carpeta"/
+logs/
+.aliasrc
+
+# ==========================================
+# ✅ ALLOWED: BASE ENVIRONMENT ONLY
+# ==========================================
+# Only sync the base SSH host environment
+!avc_ssh_host/
+
+# Allow documentation and scripts in base environment
+!avc_ssh_host/**
+!scripts/
+!docs/
+!analysis/
+!README*
+!LICENSE*
+!CHANGELOG*
+!.gitignore
+!.gitattributes
+!.github/
 
 # ==========================================
 # 🐳 DOCKER SPECIFIC FILES
@@ -264,78 +325,6 @@ test_output/
 coverage.xml
 junit.xml
 *.cover
-
-# ==========================================
-# � IGNORE ALL DOCKER PROJECTS BY DEFAULT
-# ==========================================
-# Strategy: Add projects incrementally as we prepare them
-# This ensures maximum security and control
-
-# Ignore ALL project directories by default
-abc_python_runner/
-arduino/
-avc_ai_terminal/
-avc_api/
-avc_autodeploy_manager/
-avc_code_server/
-avc_converter/
-avc_dalle_worker/
-avc_database/
-avc_db_mirror/
-avc_dev_container/
-avc_fft_streamer/
-avc_gemini_bot/
-avc_ha_editor/
-avc_php_dev/
-avc_remote_hub/
-avc_repo/
-avc_smtp/
-avc_sonarqube/
-avc_test123/
-avc_text_worker/
-avc_wireguard/
-behavioural_dragon_pro/
-bind9/
-copilot_demo/
-deepseek/
-esphome/
-nginx-rtmp/
-telegram_chatbot/
-telegram_download/
-trustvault/
-ubuntu/
-unifi/
-youtube_mp3_downloader/
-
-# Backup and old directories
-_respaldo_*/
-*_old/
-*_backup/
-
-# System directories
-@eaDir/
-#recycle/
-New folder/
-logs/
-.aliasrc
-
-# ==========================================
-# ✅ ALLOWED: BASE ENVIRONMENT ONLY
-# ==========================================
-# Only sync the base SSH host environment
-!avc_ssh_host/
-
-# Allow documentation and scripts in base environment
-!avc_ssh_host/**
-!scripts/
-!docs/
-!analysis/
-!README*
-!LICENSE*
-!CHANGELOG*
-!.gitignore
-!.gitattributes
-!.github/
 
 # ==========================================
 # 🔐 PROJECT-SPECIFIC SECURITY PATTERNS
