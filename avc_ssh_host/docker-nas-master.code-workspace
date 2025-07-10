@@ -1,0 +1,191 @@
+{
+    "folders": [
+        {
+            "name": "🏗️ AVC SSH Host (Principal)",
+            "path": "/home/avctrust/docker/avc_ssh_host"
+        },
+        {
+            "name": "🐉 Behavioural Dragon Pro",
+            "path": "/home/avctrust/docker/behavioural_dragon_pro"
+        },
+        {
+            "name": "🤖 AVC AI Terminal",
+            "path": "/home/avctrust/docker/avc_ai_terminal"
+        },
+        {
+            "name": "🔌 AVC API",
+            "path": "/home/avctrust/docker/avc_api"
+        },
+        {
+            "name": "🌐 AVC Remote Hub",
+            "path": "/home/avctrust/docker/avc_remote_hub"
+        },
+        {
+            "name": "💻 AVC Code Server",
+            "path": "/home/avctrust/docker/avc_code_server"
+        },
+        {
+            "name": "🗄️ AVC Database",
+            "path": "/home/avctrust/docker/avc_database"
+        },
+        {
+            "name": "🧠 DeepSeek",
+            "path": "/home/avctrust/docker/deepseek"
+        },
+        {
+            "name": "📡 Bind9 DNS",
+            "path": "/home/avctrust/docker/bind9"
+        },
+        {
+            "name": "🔒 AVC Wireguard",
+            "path": "/home/avctrust/docker/avc_wireguard"
+        },
+        {
+            "name": "📁 Todos los Proyectos Docker",
+            "path": "/home/avctrust/docker"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.cwd": "/home/avctrust/docker/avc_ssh_host",
+        "files.watcherExclude": {
+            "**/node_modules/**": true,
+            "**/.git/objects/**": true,
+            "**/.git/subtree-cache/**": true,
+            "**/venv/**": true,
+            "**/__pycache__/**": true,
+            "**/logs/**": true,
+            "**/tmp/**": true
+        },
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/venv": true,
+            "**/__pycache__": true,
+            "**/logs": true,
+            "**/tmp": true
+        },
+        "files.associations": {
+            "*.yml": "yaml",
+            "*.yaml": "yaml",
+            "docker-compose.yml": "yaml",
+            "Dockerfile": "dockerfile",
+            "*.sh": "shellscript"
+        },
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "git.detectSubmodules": false,
+        "explorer.sortOrder": "foldersNestsFiles"
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "🔍 Análisis Completo del Entorno",
+                "type": "shell",
+                "command": "./docker-master-analysis.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "/home/avctrust/docker/avc_ssh_host/scripts"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🌐 Análisis de Puertos",
+                "type": "shell",
+                "command": "./docker-ports-analysis.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "/home/avctrust/docker/avc_ssh_host/scripts"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🏗️ Análisis del Entorno",
+                "type": "shell",
+                "command": "./docker-environment-analysis.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "/home/avctrust/docker/avc_ssh_host/scripts"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "📊 Listar Proyectos Docker",
+                "type": "shell",
+                "command": "./list-docker-projects.sh",
+                "group": "build",
+                "options": {
+                    "cwd": "/home/avctrust/docker/avc_ssh_host/scripts"
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "🚀 Conectar al NAS Host",
+                "type": "shell",
+                "command": "ssh -p 2222 avctrust@10.0.0.10",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": true,
+                    "panel": "new"
+                },
+                "problemMatcher": []
+            }
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "🔍 Debug Behavioural Dragon Pro",
+                "type": "node",
+                "request": "launch",
+                "program": "${workspaceFolder:🐉 Behavioural Dragon Pro}/server/index.js",
+                "env": {
+                    "NODE_ENV": "development"
+                },
+                "console": "integratedTerminal",
+                "restart": true,
+                "runtimeExecutable": "node"
+            }
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.vscode-docker",
+            "ms-python.python",
+            "bradlc.vscode-tailwindcss",
+            "esbenp.prettier-vscode",
+            "ms-vscode.vscode-yaml",
+            "timonwong.shellcheck",
+            "foxundermoon.shell-format",
+            "ms-vscode.powershell",
+            "redhat.vscode-xml"
+        ]
+    }
+}

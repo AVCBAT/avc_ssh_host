@@ -1,0 +1,138 @@
+name: 🐳 Docker Build
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'avc_ssh_host/**'
+      - '.github/workflows/docker.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'avc_ssh_host/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: avc-ssh-host
+
+jobs:
+  build-and-test:
+    name: 🏗️ Build & Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: 🔑 Log in to Container Registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: 📋 Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+          
+    - name: 🏗️ Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./avc_ssh_host
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: 🧪 Test Docker image
+      run: |
+        # Build test image
+        docker build -t test-ssh-host ./avc_ssh_host
+        
+        # Run basic tests
+        docker run --rm --name test-container -d -p 2229:22 test-ssh-host
+        sleep 10
+        
+        # Check if SSH service is running
+        if docker exec test-container pgrep sshd; then
+          echo "✅ SSH service is running"
+        else
+          echo "❌ SSH service failed to start"
+          docker logs test-container
+          exit 1
+        fi
+        
+        # Check if user exists
+        if docker exec test-container id avctrust; then
+          echo "✅ User avctrust exists"
+        else
+          echo "❌ User avctrust not found"
+          exit 1
+        fi
+        
+        # Cleanup
+        docker stop test-container
+        
+    - name: 🛡️ Run security scan on image
+      if: github.event_name != 'pull_request'
+      run: |
+        # Install Trivy
+        sudo apt-get update
+        sudo apt-get install wget apt-transport-https gnupg lsb-release
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install trivy
+        
+        # Scan the built image
+        trivy image --exit-code 0 --severity HIGH,CRITICAL test-ssh-host
+
+  docker-compose-test:
+    name: 🔧 Docker Compose Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🧪 Test docker-compose
+      run: |
+        cd avc_ssh_host
+        
+        # Validate docker-compose.yml
+        docker-compose config
+        
+        # Test build
+        docker-compose build
+        
+        # Test startup (with timeout)
+        timeout 60s docker-compose up -d || true
+        
+        # Check if container started
+        sleep 10
+        if docker-compose ps | grep "Up"; then
+          echo "✅ Container started successfully"
+        else
+          echo "❌ Container failed to start"
+          docker-compose logs
+          exit 1
+        fi
+        
+        # Cleanup
+        docker-compose down -v

@@ -1,0 +1,70 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🔍 Análisis Maestro Completo",
+            "type": "shell",
+            "command": "./docker-master-analysis.sh",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/scripts"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🌐 Análisis de Puertos",
+            "type": "shell",
+            "command": "./docker-ports-analysis.sh",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🏗️ Análisis del Entorno",
+            "type": "shell",
+            "command": "./docker-environment-analysis.sh",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/scripts"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 SSH al NAS Host",
+            "type": "shell",
+            "command": "ssh -p 2222 avctrust@10.0.0.10",
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

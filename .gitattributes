@@ -1,0 +1,131 @@
+# ===============================================
+# 🔧 GITATTRIBUTES - DOCKER NAS ENVIRONMENT
+# ===============================================
+# Line ending and file type configuration
+# Generated: 2025-07-10
+
+# ===========================================
+# 📝 TEXT FILES - ENFORCE LF LINE ENDINGS
+# ===========================================
+*.md            text eol=lf
+*.txt           text eol=lf
+*.json          text eol=lf
+*.js            text eol=lf
+*.jsx           text eol=lf
+*.ts            text eol=lf
+*.tsx           text eol=lf
+*.css           text eol=lf
+*.scss          text eol=lf
+*.html          text eol=lf
+*.xml           text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+*.toml          text eol=lf
+*.ini           text eol=lf
+*.cfg           text eol=lf
+*.conf          text eol=lf
+*.py            text eol=lf
+*.sh            text eol=lf
+*.bash          text eol=lf
+*.zsh           text eol=lf
+*.fish          text eol=lf
+
+# ===========================================
+# 🐳 DOCKER FILES
+# ===========================================
+Dockerfile*     text eol=lf
+*.dockerfile    text eol=lf
+docker-compose* text eol=lf
+
+# ===========================================
+# 🔐 SECURITY FILES
+# ===========================================
+.env*           text eol=lf
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+
+# ===========================================
+# 📦 PACKAGE FILES
+# ===========================================
+package.json    text eol=lf
+package-lock.json text eol=lf
+yarn.lock       text eol=lf
+requirements.txt text eol=lf
+Pipfile         text eol=lf
+Pipfile.lock    text eol=lf
+composer.json   text eol=lf
+composer.lock   text eol=lf
+
+# ===========================================
+# 🔧 CONFIG FILES
+# ===========================================
+*.config        text eol=lf
+*.settings      text eol=lf
+*.properties    text eol=lf
+Makefile        text eol=lf
+makefile        text eol=lf
+
+# ===========================================
+# 📄 DOCUMENTATION
+# ===========================================
+README*         text eol=lf
+CHANGELOG*      text eol=lf
+LICENSE*        text eol=lf
+CONTRIBUTING*   text eol=lf
+AUTHORS*        text eol=lf
+
+# ===========================================
+# 🚫 BINARY FILES - NO TEXT PROCESSING
+# ===========================================
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.ico           binary
+*.svg           binary
+*.pdf           binary
+*.zip           binary
+*.tar           binary
+*.gz            binary
+*.bz2           binary
+*.xz            binary
+*.7z            binary
+*.rar           binary
+*.exe           binary
+*.dll           binary
+*.so            binary
+*.dylib         binary
+*.db            binary
+*.sqlite        binary
+*.sqlite3       binary
+
+# ===========================================
+# 🔑 SECURITY MARKERS
+# ===========================================
+# Mark sensitive files for extra attention
+*.key           diff=nodiff
+*.pem           diff=nodiff
+*.p12           diff=nodiff
+*.pfx           diff=nodiff
+*.crt           diff=nodiff
+*.cert          diff=nodiff
+
+# ===========================================
+# 📊 STATISTICS EXCLUSIONS
+# ===========================================
+# Exclude generated files from language statistics
+*.min.js        linguist-generated=true
+*.min.css       linguist-generated=true
+dist/*          linguist-generated=true
+build/*         linguist-generated=true
+public/assets/* linguist-generated=true
+node_modules/*  linguist-vendored=true
+vendor/*        linguist-vendored=true
+
+# ===========================================
+# 🏷️ LANGUAGE DETECTION
+# ===========================================
+# Override GitHub's language detection
+*.dockerfile    linguist-language=Dockerfile
+docker-compose* linguist-language=YAML
+*.conf          linguist-language=INI

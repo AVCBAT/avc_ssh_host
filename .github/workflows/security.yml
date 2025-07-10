@@ -1,0 +1,135 @@
+name: 🔐 Security Check
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-scan:
+    name: 🛡️ Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: 📊 Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+        
+    - name: 🔐 Check for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+
+  docker-security:
+    name: 🐳 Docker Security
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔧 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: 🛡️ Run Hadolint
+      uses: hadolint/hadolint-action@v3.1.0
+      with:
+        dockerfile: avc_ssh_host/Dockerfile
+        format: sarif
+        output-file: hadolint-results.sarif
+        no-fail: true
+        
+    - name: 📊 Upload Hadolint scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: hadolint-results.sarif
+
+  gitignore-check:
+    name: 📋 Gitignore Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Check for ignored files in repo
+      run: |
+        # Check if any .env files are committed
+        if git ls-files | grep -E '\.(env|key|pem|p12|pfx)$'; then
+          echo "❌ Security risk: Found sensitive files in repository!"
+          exit 1
+        fi
+        
+        # Check for common secret patterns
+        if git ls-files | xargs grep -l "password\|secret\|token\|api[_-]key" 2>/dev/null | grep -v README.md | grep -v .github; then
+          echo "⚠️ Warning: Found potential secrets in files!"
+          echo "Please review the above files for sensitive information."
+        fi
+        
+        echo "✅ Gitignore validation passed!"
+
+  file-validation:
+    name: 📄 File Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Validate file structure
+      run: |
+        # Check required files exist
+        required_files=(".gitignore" ".gitattributes" "README.md" "avc_ssh_host/docker-compose.yml")
+        
+        for file in "${required_files[@]}"; do
+          if [[ ! -f "$file" ]]; then
+            echo "❌ Missing required file: $file"
+            exit 1
+          fi
+        done
+        
+        # Check that project directories are ignored
+        ignored_projects=("behavioural_dragon_pro" "avc_api" "avc_database")
+        
+        for project in "${ignored_projects[@]}"; do
+          if git ls-files | grep "^$project/"; then
+            echo "❌ Project $project should be ignored but contains tracked files!"
+            exit 1
+          fi
+        done
+        
+        echo "✅ File structure validation passed!"
+
+  markdown-lint:
+    name: 📝 Markdown Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🔍 Lint Markdown files
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: .markdownlint.json
+        files: '**/*.md'
+        ignore: node_modules
+        use-verbose-output: true

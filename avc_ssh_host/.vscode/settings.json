@@ -1,0 +1,29 @@
+{
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/.git/objects/**": true,
+        "**/venv/**": true,
+        "**/__pycache__/**": true,
+        "**/logs/**": true,
+        "**/tmp/**": true,
+        "**/analysis/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/venv": true,
+        "**/__pycache__": true,
+        "**/logs": true,
+        "**/tmp": true
+    },
+    "files.associations": {
+        "*.yml": "yaml",
+        "*.yaml": "yaml",
+        "docker-compose*.yml": "yaml",
+        "Dockerfile*": "dockerfile",
+        "*.sh": "shellscript"
+    },
+    "explorer.sortOrder": "foldersNestsFiles",
+    "git.detectSubmodules": false,
+    "terminal.integrated.defaultProfile.linux": "bash"
+}

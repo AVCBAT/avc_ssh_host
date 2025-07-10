@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  avc_ssh_host:
+    build: .
+    container_name: avc_ssh_host
+    ports:
+      - "2229:22"  # SSH contenedor expuesto en NAS:2229
+    volumes:
+      - /volume1/docker:/home/avctrust/docker  # Montamos carpeta completa del NAS
+    restart: unless-stopped

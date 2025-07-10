@@ -1,0 +1,403 @@
+# ===============================================
+# 🔒 MASTER GITIGNORE - DOCKER NAS ENVIRONMENT
+# ===============================================
+# Security file for 41 Docker projects
+# Generated: 2025-07-10
+
+# ==========================================# ==========================================
+# � IGNORE ALL DOCKER PROJECTS BY DEFAULT
+# ==========================================
+# Strategy: Add projects incrementally as we prepare them
+# This ensures maximum security and control
+
+# Ignore ALL project directories by defaultRITICAL SECURITY FILES
+# ==========================================
+# NEVER commit these files
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+
+# SSH credentials and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+ssh_host_*
+known_hosts
+
+# SSL/TLS certificates
+*.crt
+*.csr
+*.der
+*.cert
+*.ca-bundle
+
+# Configuration files with secrets
+secrets/
+credentials/
+auth/
+config/secrets.yml
+config/database.yml
+config/production.yml
+
+# ==========================================
+# 🐳 DOCKER SPECIFIC FILES
+# ==========================================
+# Persistent volumes and data
+volumes/
+data/
+db_data/
+postgres_data/
+mysql_data/
+mongodb_data/
+redis_data/
+elasticsearch_data/
+logs/
+backups/
+
+# Container states
+.docker/
+docker-compose.override.yml
+docker-compose.prod.yml
+docker-compose.local.yml
+
+# ==========================================
+# 📊 DATABASES AND BACKUPS
+# ==========================================
+# Database dumps
+*.sql
+*.dump
+*.backup
+*.bak
+*.tar.gz.bak
+*_backup_*
+backup_*
+dump_*
+
+# SQLite databases
+*.sqlite
+*.sqlite3
+*.db
+
+# ==========================================
+# 🗂️ TEMPORARY FILES AND CACHE
+# ==========================================
+# System temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Application cache
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+.nyc_output
+coverage/
+.sass-cache/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.pnp.*
+
+# ==========================================
+# 🔧 DEVELOPMENT FILES
+# ==========================================
+# IDEs and editors
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+!.vscode/tasks.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+pip-log.txt
+
+# ==========================================
+# 📝 LOGS AND MONITORING
+# ==========================================
+# Log files
+*.log
+logs/
+*.log.*
+log/
+access.log*
+error.log*
+debug.log*
+app.log*
+server.log*
+
+# Monitoring
+monitoring/
+metrics/
+traces/
+
+# ==========================================
+# 🏗️ PROJECT SPECIFIC
+# ==========================================
+
+# SonarQube
+sonarqube/data/
+sonarqube/logs/
+sonarqube/extensions/
+sonarqube/temp/
+scanner/cache/
+scanner/project/
+.sonar/
+
+# Code Server
+code-server/data/
+code-server/extensions/
+code-server/logs/
+workspace/
+workspaces/
+
+# Guacamole (Remote Hub)
+guacd/
+guacamole/
+postgres/
+
+# Bind9 DNS
+zones/*.signed
+zones/*.jnl
+zones/db.*~
+
+# WireGuard
+peer*.conf
+wg*.conf
+!wg0.conf.example
+
+# AI Terminal / Telegram Bots
+bot_activity.log
+*.session
+telegram_session.*
+
+# SMTP Server
+queue/
+spool/
+mail/
+
+# ==========================================
+# 📁 SYNOLOGY NAS FILES
+# ==========================================
+# Synology specific files
+@eaDir/
+#recycle/
+*.@SynoEAStream
+*.@SynoResource
+.syno/
+
+# ==========================================
+# 🔍 ANALYSIS AND REPORTS
+# ==========================================
+# Temporary reports
+/tmp/docker_master_analysis_*/
+analysis_output/
+reports/
+*.report
+audit_*.txt
+scan_*.json
+
+# ==========================================
+# 🚀 PRODUCTION FILES
+# ==========================================
+# Production configuration files
+prod.env
+production.env
+staging.env
+config.prod.json
+settings.prod.py
+
+# Compiled assets
+dist/
+build/
+public/assets/
+static/assets/
+
+# ==========================================
+# 📦 DEPENDENCIES AND LIBRARIES
+# ==========================================
+# Compiled dependencies
+vendor/
+lib/
+libs/
+third_party/
+
+# ==========================================
+# 🧪 TESTING
+# ==========================================
+# Testing files
+test-results/
+test_output/
+coverage.xml
+junit.xml
+*.cover
+
+# ==========================================
+# � IGNORE ALL DOCKER PROJECTS BY DEFAULT
+# ==========================================
+# Strategy: Add projects incrementally as we prepare them
+# This ensures maximum security and control
+
+# Ignore ALL project directories by default
+abc_python_runner/
+arduino/
+avc_ai_terminal/
+avc_api/
+avc_autodeploy_manager/
+avc_code_server/
+avc_converter/
+avc_dalle_worker/
+avc_database/
+avc_db_mirror/
+avc_dev_container/
+avc_fft_streamer/
+avc_gemini_bot/
+avc_ha_editor/
+avc_php_dev/
+avc_remote_hub/
+avc_repo/
+avc_smtp/
+avc_sonarqube/
+avc_test123/
+avc_text_worker/
+avc_wireguard/
+behavioural_dragon_pro/
+bind9/
+copilot_demo/
+deepseek/
+esphome/
+nginx-rtmp/
+telegram_chatbot/
+telegram_download/
+trustvault/
+ubuntu/
+unifi/
+youtube_mp3_downloader/
+
+# Backup and old directories
+_respaldo_*/
+*_old/
+*_backup/
+
+# System directories
+@eaDir/
+#recycle/
+New folder/
+logs/
+
+# ==========================================
+# ✅ ALLOWED: BASE ENVIRONMENT ONLY
+# ==========================================
+# Only sync the base SSH host environment
+!avc_ssh_host/
+
+# Allow documentation and scripts in base environment
+!avc_ssh_host/**
+!scripts/
+!docs/
+!analysis/
+!README*
+!LICENSE*
+!CHANGELOG*
+!.gitignore
+!.gitattributes
+!.github/
+
+# ==========================================
+# 🔐 PROJECT-SPECIFIC SECURITY PATTERNS
+# ==========================================
+
+# API Keys and tokens (common patterns)
+*api_key*
+*api-key*
+*apikey*
+*token*
+*secret*
+*password*
+*passwd*
+*credential*
+
+# Environment variables by project
+*/.env
+*/.env.*
+*/secrets/
+*/credentials/
+
+# Project-specific data
+*/data/
+*/logs/
+*/cache/
+*/tmp/
+*/temp/
+
+# ==========================================
+# ⚡ LARGE FILES AND BINARIES
+# ==========================================
+# Large multimedia files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.iso
+*.dmg
+*.img
+
+# Large compressed files
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.zip
+*.rar
+*.7z
+
+# Size limit (files >100MB)
+*.large
+*.huge
+
+# ==========================================
+# 🔄 MIGRATION FILES
+# ==========================================
+# Temporary backups
+_respaldo_*/
+*_old/
+*_backup/
+*.bak
+*.orig
+
+# ==========================================
+# 📝 SECURITY NOTES
+# ==========================================
+# 1. Review this file regularly
+# 2. Never commit real .env files
+# 3. Use templates for configurations
+# 4. Audit files before commit
+# 5. Set up pre-commit hooks
+# 6. Add projects incrementally
+# 7. Clean each project before inclusion
+# ==========================================
