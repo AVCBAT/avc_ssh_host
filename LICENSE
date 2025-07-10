@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2025 AVC Trust
+Copyright (c) 2025 Adalberto Vallejo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+<<<<<<< HEAD
 
 ## Third-Party Licenses
 
@@ -71,3 +72,5 @@ SOFTWARE.
 
 Use at your own risk. The authors are not responsible for any damage or data
 loss that may occur from the use of this software.
+=======
+>>>>>>> e670fdb6be77aa80a7ebcc1f03252af3d75c85c4
